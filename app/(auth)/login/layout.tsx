@@ -175,7 +175,7 @@ export default function AuthLayout({
               </h1>
               <div className="inline-flex items-center px-5 py-2 bg-white/20 backdrop-blur-xl border border-white/40 rounded-full shadow-xl">
                 <span className="text-white text-[11px] font-bold tracking-[0.2em] uppercase opacity-95">
-                  Creative Operations
+                  SSI MAYA
                 </span>
               </div>
             </motion.div>
