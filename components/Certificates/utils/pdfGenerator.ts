@@ -166,8 +166,8 @@ if (isV2Template) {
   const nameY = 324;
   const hospitalY = 300;
 
-  const doiX = 135;
-  const doiY = 62;
+  const doiX = 139;
+  const doiY = 76;
 
   const certNoX = 445;
   const certNoY = 132;
