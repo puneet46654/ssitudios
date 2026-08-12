@@ -163,14 +163,14 @@ if (isV2Template) {
   };
 
   // Corrected positions for certificate2.pdf
-  const nameY = 324;
-  const hospitalY = 310;
+  const nameY = 334;
+  const hospitalY = 315;
 
   const doiX = 141;
   const doiY = 80;
 
   const certNoX = 469;
-  const certNoY = 165;
+  const certNoY = 162;
 
   // 1. Doctor Name - centered in the blank space
   drawCenteredFittedText(
