@@ -164,13 +164,13 @@ if (isV2Template) {
 
   // Corrected positions for certificate2.pdf
   const nameY = 324;
-  const hospitalY = 303;
+  const hospitalY = 300;
 
-  const doiX = 128;
-  const doiY = 68;
+  const doiX = 135;
+  const doiY = 62;
 
-  const certNoX = 435;
-  const certNoY = 139;
+  const certNoX = 445;
+  const certNoY = 132;
 
   // 1. Doctor Name - centered in the blank space
   drawCenteredFittedText(
