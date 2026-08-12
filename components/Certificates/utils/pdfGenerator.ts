@@ -166,11 +166,11 @@ if (isV2Template) {
   const nameY = 324;
   const hospitalY = 310;
 
-  const doiX = 139;
-  const doiY = 76;
+  const doiX = 141;
+  const doiY = 80;
 
-  const certNoX = 465;
-  const certNoY = 145;
+  const certNoX = 469;
+  const certNoY = 165;
 
   // 1. Doctor Name - centered in the blank space
   drawCenteredFittedText(
