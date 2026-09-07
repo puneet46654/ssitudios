@@ -1,28 +1,6 @@
 'use client';
-
 import React from 'react';
 import { BookingFormData } from '@/app/slots/mantram/page';
-
-const SPECIALTIES = [
-  'Anaesthesiology', 'Bariatric Surgery', 'Cardiac Surgery', 'Cardiothoracic Surgery',
-  'Colorectal Surgery', 'ENT Surgery', 'Gastrointestinal Surgery', 'General Surgery',
-  'Gynaecologic Oncology', 'Hepatobiliary Surgery', 'Neurosurgery', 'Orthopaedic Surgery',
-  'Paediatric Surgery', 'Plastic & Reconstructive Surgery', 'Surgical Oncology',
-  'Thoracic Surgery', 'Transplant Surgery', 'Urology', 'Vascular Surgery',
-];
-
-const COUNTRIES = [
-  'India', 'United States', 'United Kingdom', 'United Arab Emirates', 
-  'Canada', 'Australia', 'Germany', 'France', 'Singapore', 'Japan', 
-  'Saudi Arabia', 'Qatar', 'Oman', 'Kuwait', 'Bahrain', 'South Africa'
-];
-
-const COUNTRY_CODES = [
-  { code: '+91', country: 'IN' }, { code: '+1', country: 'US/CA' },
-  { code: '+44', country: 'UK' }, { code: '+971', country: 'UAE' },
-  { code: '+65', country: 'SG' }, { code: '+61', country: 'AU' },
-  { code: '+49', country: 'DE' }
-];
 
 interface BookingFormProps {
   formData: BookingFormData;
@@ -35,214 +13,214 @@ interface BookingFormProps {
 
 export default function BookingForm({ formData, selectedSlot, isSubmitting, onChange, onSubmit, onBack }: BookingFormProps) {
   return (
-    <form onSubmit={onSubmit} className="animate-in fade-in slide-in-from-bottom-3 duration-300 w-full max-w-6xl mx-auto space-y-6">
+    <form onSubmit={onSubmit} className="animate-in fade-in slide-in-from-bottom-4 duration-500 w-full max-w-4xl mx-auto space-y-6">
       
-      {/* Selected Slot Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-blue-50/50 border border-blue-100 p-4 rounded-xl gap-3 shadow-sm">
+      {/* Active Selection Indicator */}
+      <div className="flex items-center justify-between bg-white border border-slate-200/80 p-5 rounded-2xl shadow-sm">
         <div>
-          <span className="text-xs text-blue-600 uppercase tracking-wider block font-bold mb-1">Selected Time Window</span>
-          <span className="text-sm sm:text-base font-bold text-gray-900">{selectedSlot}</span>
+          <span className="text-[11px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">Locked Target Slot</span>
+          <div className="flex items-center gap-3">
+            <span className="text-lg font-extrabold text-slate-900">{formData.bookingDate}</span>
+            <span className="bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-1 rounded-lg">{selectedSlot}</span>
+          </div>
         </div>
-        <button
-          type="button"
-          onClick={onBack}
-          className="text-sm text-blue-600 hover:text-blue-800 font-semibold transition-colors flex items-center gap-1 bg-white px-4 py-2 rounded-lg border border-blue-100 shadow-sm hover:shadow"
+        <button 
+          type="button" 
+          onClick={onBack} 
+          className="px-4 py-2 text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all cursor-pointer shadow-sm"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
-          </svg>
-          Change Time
+          Change Slot
         </button>
       </div>
 
-      {/* Section 1: Location & Date */}
-      <div className="bg-white p-5 sm:p-7 rounded-2xl border border-gray-200 shadow-sm">
-        <h3 className="text-sm sm:text-base font-bold text-gray-900 border-b border-gray-100 pb-3 mb-5 font-['Sora',_sans-serif]">
-          1. Appointment & Location Details
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
-          <div className="xl:col-span-1">
-            <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 font-['Poppins',_sans-serif]">Date *</label>
-            <input
-              type="date"
-              name="bookingDate"
-              value={formData.bookingDate}
-              onChange={onChange}
-              required
-              className="w-full bg-gray-50 border border-gray-200 hover:border-blue-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none rounded-xl px-4 py-3 text-sm text-gray-900 transition-all"
-            />
-          </div>
-          <div className="xl:col-span-1">
-            <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 font-['Poppins',_sans-serif]">Country *</label>
-            <select
-              name="country"
-              value={formData.country}
-              onChange={onChange}
-              required
-              className="w-full bg-gray-50 border border-gray-200 hover:border-blue-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none rounded-xl px-4 py-3 text-sm text-gray-900 transition-all appearance-none"
-              style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: `right 1rem center`, backgroundRepeat: `no-repeat`, backgroundSize: `1.2em 1.2em`, paddingRight: `2.5rem` }}
-            >
-              {COUNTRIES.map((c) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-          </div>
-          <div className="xl:col-span-1">
-            <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 font-['Poppins',_sans-serif]">State *</label>
-            <input
-              type="text"
-              name="state"
-              placeholder="Enter State"
-              value={formData.state}
-              onChange={onChange}
-              required
-              className="w-full bg-gray-50 border border-gray-200 hover:border-blue-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none rounded-xl px-4 py-3 text-sm text-gray-900 transition-all"
-            />
-          </div>
-          <div className="xl:col-span-1">
-            <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 font-['Poppins',_sans-serif]">City / Town *</label>
-            <input
-              type="text"
-              name="place"
-              placeholder="Enter City"
-              value={formData.place}
-              onChange={onChange}
-              required
-              className="w-full bg-gray-50 border border-gray-200 hover:border-blue-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none rounded-xl px-4 py-3 text-sm text-gray-900 transition-all"
-            />
-          </div>
-          <div className="xl:col-span-1 sm:col-span-2 lg:col-span-4 xl:col-span-1">
-            <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 font-['Poppins',_sans-serif]">Venue / Landmark *</label>
-            <input
-              type="text"
-              name="location"
-              placeholder="Enter Landmark"
-              value={formData.location}
-              onChange={onChange}
-              required
-              className="w-full bg-gray-50 border border-gray-200 hover:border-blue-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none rounded-xl px-4 py-3 text-sm text-gray-900 transition-all"
-            />
-          </div>
+      {/* Main Details Box */}
+      <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+        <div className="border-b border-slate-100 pb-4">
+          <h3 className="text-lg font-black text-slate-900">Practitioner & Institutional Details</h3>
+          <p className="text-xs text-slate-500 mt-0.5">Please provide accurate verification information for your clinical slot record.</p>
         </div>
-      </div>
 
-      {/* Section 2: Doctor Details */}
-      <div className="bg-white p-5 sm:p-7 rounded-2xl border border-gray-200 shadow-sm">
-        <h3 className="text-sm sm:text-base font-bold text-gray-900 border-b border-gray-100 pb-3 mb-5 font-['Sora',_sans-serif]">
-          2. Practitioner & Hospital Details
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          <div className="lg:col-span-2 flex gap-3">
-            <div className="w-24 sm:w-28 flex-shrink-0">
-              <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 font-['Poppins',_sans-serif]">Title *</label>
-              <select
-                name="salutation"
-                value={formData.salutation}
-                onChange={onChange}
-                className="w-full bg-gray-50 border border-gray-200 hover:border-blue-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none rounded-xl px-3 py-3 text-sm text-gray-900 transition-all appearance-none"
-                style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: `right 0.5rem center`, backgroundRepeat: `no-repeat`, backgroundSize: `1.2em 1.2em`, paddingRight: `1.75rem` }}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          
+          {/* Doctor Name with Prefix */}
+          <div className="space-y-1.5">
+            <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wide">Full Name & Title <span className="text-rose-500">*</span></label>
+            <div className="flex gap-2">
+              <select 
+                name="salutation" 
+                value={formData.salutation} 
+                onChange={onChange} 
+                className="w-28 bg-slate-50 border border-slate-200 rounded-xl px-3 py-3 text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:bg-white cursor-pointer shadow-sm"
               >
                 <option value="Dr.">Dr.</option>
                 <option value="Mr.">Mr.</option>
                 <option value="Mrs.">Mrs.</option>
+                <option value="Ms.">Ms.</option>
+                <option value="Prof.">Prof.</option>
               </select>
-            </div>
-            <div className="flex-1">
-              <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 font-['Poppins',_sans-serif]">Doctor Name *</label>
-              <input
-                type="text"
-                name="doctorName"
-                placeholder="Enter Full Name"
-                value={formData.doctorName}
-                onChange={onChange}
-                required
-                className="w-full bg-gray-50 border border-gray-200 hover:border-blue-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none rounded-xl px-4 py-3 text-sm text-gray-900 transition-all"
-              />
-            </div>
-          </div>
-          
-          <div className="lg:col-span-2">
-            <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 font-['Poppins',_sans-serif]">Mobile Number *</label>
-            <div className="flex gap-3">
-              <select
-                name="countryCode"
-                value={formData.countryCode}
-                onChange={onChange}
-                className="w-28 sm:w-32 bg-gray-50 border border-gray-200 hover:border-blue-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none rounded-xl px-3 py-3 text-sm text-gray-900 transition-all appearance-none flex-shrink-0"
-                style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: `right 0.5rem center`, backgroundRepeat: `no-repeat`, backgroundSize: `1.2em 1.2em`, paddingRight: `1.75rem` }}
-              >
-                {COUNTRY_CODES.map((item) => (
-                  <option key={item.code} value={item.code}>
-                    {item.code} ({item.country})
-                  </option>
-                ))}
-              </select>
-              <input
-                type="tel"
-                name="mobileNo"
-                placeholder="Mobile Number"
-                value={formData.mobileNo}
-                onChange={onChange}
-                required
-                className="flex-1 bg-gray-50 border border-gray-200 hover:border-blue-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none rounded-xl px-4 py-3 text-sm text-gray-900 transition-all min-w-0"
+              <input 
+                type="text" 
+                name="doctorName" 
+                required 
+                placeholder="e.g. Ramesh Kumar"
+                value={formData.doctorName} 
+                onChange={onChange} 
+                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium text-slate-800 outline-none focus:border-emerald-500 focus:bg-white shadow-sm" 
               />
             </div>
           </div>
 
-          <div className="lg:col-span-2">
-            <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 font-['Poppins',_sans-serif]">Hospital Name *</label>
-            <input
-              type="text"
-              name="hospitalName"
-              placeholder="Enter Hospital / Center"
-              value={formData.hospitalName}
-              onChange={onChange}
-              required
-              className="w-full bg-gray-50 border border-gray-200 hover:border-blue-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none rounded-xl px-4 py-3 text-sm text-gray-900 transition-all"
+          {/* Specialty */}
+          <div className="space-y-1.5">
+            <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wide">Specialty / Department <span className="text-rose-500">*</span></label>
+            <input 
+              type="text" 
+              name="specialty" 
+              required 
+              placeholder="e.g. Cardiology / Anaesthesiology"
+              value={formData.specialty} 
+              onChange={onChange} 
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium text-slate-800 outline-none focus:border-emerald-500 focus:bg-white shadow-sm" 
             />
           </div>
-          
-          <div className="lg:col-span-2">
-            <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 font-['Poppins',_sans-serif]">Specialty *</label>
-            <select
-              name="specialty"
-              value={formData.specialty}
-              onChange={onChange}
-              required
-              className="w-full bg-gray-50 border border-gray-200 hover:border-blue-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none rounded-xl px-4 py-3 text-sm text-gray-900 transition-all appearance-none"
-              style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: `right 1rem center`, backgroundRepeat: `no-repeat`, backgroundSize: `1.2em 1.2em`, paddingRight: `2.5rem` }}
+
+          {/* Mobile Number with Country Code */}
+          <div className="space-y-1.5">
+            <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wide">Mobile Number <span className="text-rose-500">*</span></label>
+            <div className="flex gap-2">
+              <select 
+                name="countryCode" 
+                value={formData.countryCode} 
+                onChange={onChange} 
+                className="w-32 bg-slate-50 border border-slate-200 rounded-xl px-3 py-3 text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:bg-white cursor-pointer shadow-sm"
+              >
+                <option value="+91">+91 (IN)</option>
+                <option value="+1">+1 (US)</option>
+                <option value="+44">+44 (UK)</option>
+                <option value="+971">+971 (UAE)</option>
+              </select>
+              <input 
+                type="tel" 
+                name="mobileNo" 
+                required 
+                placeholder="9876543210"
+                value={formData.mobileNo} 
+                onChange={onChange} 
+                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium text-slate-800 outline-none focus:border-emerald-500 focus:bg-white shadow-sm" 
+              />
+            </div>
+          </div>
+
+          {/* Email Address */}
+          <div className="space-y-1.5">
+            <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wide">Email Address <span className="text-rose-500">*</span></label>
+            <input 
+              type="email" 
+              name="email" 
+              required 
+              placeholder="doctor@hospital.com"
+              value={formData.email} 
+              onChange={onChange} 
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium text-slate-800 outline-none focus:border-emerald-500 focus:bg-white shadow-sm" 
+            />
+          </div>
+
+          {/* Hospital / Clinic Name */}
+          <div className="space-y-1.5 md:col-span-2">
+            <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wide">Hospital / Institution Name <span className="text-rose-500">*</span></label>
+            <input 
+              type="text" 
+              name="hospitalName" 
+              required 
+              placeholder="e.g. All India Institute of Medical Sciences"
+              value={formData.hospitalName} 
+              onChange={onChange} 
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium text-slate-800 outline-none focus:border-emerald-500 focus:bg-white shadow-sm" 
+            />
+          </div>
+
+          {/* Country */}
+          <div className="space-y-1.5">
+            <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wide">Country <span className="text-rose-500">*</span></label>
+            <select 
+              name="country" 
+              required 
+              value={formData.country} 
+              onChange={onChange} 
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:bg-white cursor-pointer shadow-sm"
             >
-              {SPECIALTIES.map((spec) => (
-                <option key={spec} value={spec}>{spec}</option>
-              ))}
+              <option value="India">India</option>
+              <option value="United States">United States</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Canada">Canada</option>
             </select>
           </div>
+
+          {/* State */}
+          <div className="space-y-1.5">
+            <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wide">State / Province <span className="text-rose-500">*</span></label>
+            <input 
+              type="text" 
+              name="state" 
+              required 
+              placeholder="e.g. Haryana"
+              value={formData.state} 
+              onChange={onChange} 
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium text-slate-800 outline-none focus:border-emerald-500 focus:bg-white shadow-sm" 
+            />
+          </div>
+
+          {/* Place / City */}
+          <div className="space-y-1.5">
+            <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wide">City / Town <span className="text-rose-500">*</span></label>
+            <input 
+              type="text" 
+              name="place" 
+              required 
+              placeholder="e.g. Gurugram"
+              value={formData.place} 
+              onChange={onChange} 
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium text-slate-800 outline-none focus:border-emerald-500 focus:bg-white shadow-sm" 
+            />
+          </div>
+
+          {/* Location / Landmark */}
+          <div className="space-y-1.5">
+            <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wide">Specific Venue / Location <span className="text-rose-500">*</span></label>
+            <input 
+              type="text" 
+              name="location" 
+              required 
+              placeholder="e.g. Main Auditorium Block B"
+              value={formData.location} 
+              onChange={onChange} 
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium text-slate-800 outline-none focus:border-emerald-500 focus:bg-white shadow-sm" 
+            />
+          </div>
+
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex flex-col-reverse sm:flex-row gap-3 pt-4 justify-end">
-        <button
-          type="button"
-          onClick={onBack}
-          className="w-full sm:w-auto px-8 py-3.5 bg-white border border-gray-300 hover:bg-gray-50 hover:border-gray-400 text-gray-700 font-bold rounded-xl text-sm transition-all focus:outline-none focus:ring-2 focus:ring-gray-200 shadow-sm font-['Poppins',_sans-serif]"
+      {/* Action Footer */}
+      <div className="flex items-center justify-end gap-3 pt-2">
+        <button 
+          type="button" 
+          onClick={onBack} 
+          className="px-6 py-3.5 bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 font-bold rounded-xl text-sm transition-all cursor-pointer shadow-sm"
         >
           Cancel
         </button>
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full sm:w-auto min-w-[200px] px-8 py-3.5 bg-blue-600 hover:bg-blue-700 active:scale-[0.99] shadow-md hover:shadow-lg text-white font-bold rounded-xl text-sm transition-all flex justify-center items-center focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed font-['Poppins',_sans-serif]"
+        <button 
+          type="submit" 
+          disabled={isSubmitting} 
+          className="min-w-[220px] px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm transition-all cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2"
         >
           {isSubmitting ? (
-            <span className="flex items-center gap-2">
-              <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Confirming...
-            </span>
-          ) : 'Confirm Appointment'}
+            <>
+              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+              Securing Slot...
+            </>
+          ) : 'Confirm & Generate Ticket'}
         </button>
       </div>
     </form>
