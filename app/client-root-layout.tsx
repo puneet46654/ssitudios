@@ -102,9 +102,9 @@ function AppLayout({ children }: { children: ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const forceActive = pathname === "/selector" ? "Dashboard" : undefined;
   const isEditorPage = pathname?.startsWith("/editor");
-  const isStandalonePage = pathname === "/slots" || isEditorPage;
+  const isSlotsPage = pathname?.startsWith("/slots");
+  const isStandalonePage = isSlotsPage || isEditorPage;
   const isLoginPage = pathname === "/login";
-  const isSlotsPage = pathname === "/slots";
 
   const toggleSidebar = useCallback(() => {
     setIsSidebarOpen(prev => !prev);
