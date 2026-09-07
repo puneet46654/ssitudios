@@ -125,15 +125,29 @@ export default function BookingForm({ formData, selectedSlot, isSubmitting, onCh
             />
           </div>
 
-          {/* Institution / University Name */}
+          {/* Hospital Name */}
           <div className="space-y-1.5 md:col-span-2">
-            <label className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider px-1">Institution / University Name <span className="text-rose-500">*</span></label>
+            <label className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider px-1">Hospital Name <span className="text-rose-500">*</span></label>
             <input 
               type="text" 
-              name="institutionName" 
+              name="hospitalName" 
               required 
-              placeholder="e.g. SMRSC Research Institute"
-              value={formData.institutionName} 
+              placeholder="e.g. SMRSC Research Hospital"
+              value={formData.hospitalName} 
+              onChange={onChange} 
+              className="w-full bg-slate-50/80 border border-slate-200 rounded-2xl px-4 py-3 text-xs sm:text-sm font-medium text-slate-800 outline-none focus:border-purple-500 focus:bg-white shadow-sm" 
+            />
+          </div>
+
+          {/* Conference Name */}
+          <div className="space-y-1.5 md:col-span-2">
+            <label className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider px-1">Conference Name <span className="text-rose-500">*</span></label>
+            <input 
+              type="text" 
+              name="conferenceName" 
+              required 
+              placeholder="e.g. Global Medical Innovation Conference"
+              value={formData.conferenceName} 
               onChange={onChange} 
               className="w-full bg-slate-50/80 border border-slate-200 rounded-2xl px-4 py-3 text-xs sm:text-sm font-medium text-slate-800 outline-none focus:border-purple-500 focus:bg-white shadow-sm" 
             />

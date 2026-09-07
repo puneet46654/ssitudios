@@ -16,7 +16,8 @@ export interface ConferenceBookingFormData {
   countryCode: string;
   mobileNo: string;
   email: string;
-  institutionName: string;
+  hospitalName: string;
+  conferenceName: string;
   designation: string;
 }
 
@@ -60,7 +61,8 @@ export default function ConferenceBookingPage() {
     countryCode: '+91',
     mobileNo: '',
     email: '',
-    institutionName: '',
+    hospitalName: '',
+    conferenceName: '',
     designation: 'Delegate / Researcher',
   });
 

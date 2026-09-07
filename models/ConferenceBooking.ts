@@ -13,7 +13,8 @@ export interface IConferenceBooking extends Document {
   countryCode: string;
   mobileNo: string;
   email: string;
-  institutionName: string;
+  hospitalName: string;
+  conferenceName: string;
   designation: string;
   createdAt: Date;
 }
@@ -31,7 +32,8 @@ const ConferenceBookingSchema = new Schema<IConferenceBooking>({
   countryCode: { type: String, required: true },
   mobileNo: { type: String, required: true },
   email: { type: String, required: true },
-  institutionName: { type: String, required: true },
+  hospitalName: { type: String, required: true },
+  conferenceName: { type: String, required: true },
   designation: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });

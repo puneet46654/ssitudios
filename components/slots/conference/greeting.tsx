@@ -66,9 +66,14 @@ export default function GreetingTicket({ bookingNo, formData, selectedSlot, onNe
                 </div>
 
                 <div>
-                   <p className="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider">Institution & Contact</p>
-                   <p className="text-sm font-bold text-slate-900 leading-tight mt-0.5">{formData.institutionName}</p>
+                   <p className="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider">Hospital & Contact</p>
+                   <p className="text-sm font-bold text-slate-900 leading-tight mt-0.5">{formData.hospitalName}</p>
                    <p className="text-xs font-medium text-slate-600 mt-0.5">{formData.countryCode} {formData.mobileNo} • {formData.email}</p>
+                </div>
+
+                <div>
+                   <p className="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider">Conference</p>
+                   <p className="text-sm font-bold text-slate-900 leading-tight mt-0.5">{formData.conferenceName}</p>
                 </div>
 
                 <div className="bg-purple-50/50 border border-purple-100/80 p-3 rounded-2xl">

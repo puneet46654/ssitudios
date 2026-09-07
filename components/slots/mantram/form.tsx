@@ -125,9 +125,9 @@ export default function BookingForm({ formData, selectedSlot, isSubmitting, onCh
             />
           </div>
 
-          {/* Hospital / Clinic Name */}
+          {/* Hospital Name */}
           <div className="space-y-1.5 md:col-span-2">
-            <label className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider px-1">Hospital / Institution Name <span className="text-rose-500">*</span></label>
+            <label className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider px-1">Hospital Name <span className="text-rose-500">*</span></label>
             <input 
               type="text" 
               name="hospitalName" 
