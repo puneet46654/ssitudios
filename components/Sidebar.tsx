@@ -59,13 +59,13 @@ const menu: MenuItem[] = [
     requiredAccess: 'certificateEditor',
     children: [
       { name: 'Certificates', path: '/certificates/database' }, 
-      { name: 'Analysis', path: '/certificates/analysis' },
-      { name: 'Faculty Invitation', path: '/auto', badge: 'NEW' },
-      { name: 'Excel Filter', path: '/filter', badge: 'NEW' },
+      // { name: 'Analysis', path: '/certificates/analysis' },
+      //{ name: 'Faculty Invitation', path: '/auto', badge: 'NEW' },
+      //{ name: 'Excel Filter', path: '/filter', badge: 'NEW' },
     
     ],
   },
-  { name: 'Bg Remover', icon: LuEraser, path: "/bgremover", requiredAccess: 'bgRemover' },
+ // { name: 'Bg Remover', icon: LuEraser, path: "/bgremover", requiredAccess: 'bgRemover' },
   
   // --- FILE CONVERTER (PUBLIC ACCESS) ---
   {
@@ -75,15 +75,15 @@ const menu: MenuItem[] = [
     children: [
       { name: 'Image Converter', path: '/converter/image', badge: 'NEW' },
       { name: 'Docs Converter', path: '/converter/docs', badge: 'NEW' },
-      { name: 'Video Converter', path: '/converter/video', badge: 'NEW' },
+     // { name: 'Video Converter', path: '/converter/video', badge: 'NEW' },
 
     ],
   },
   
-  { name: 'Visiting Cards', icon: LuContact, path: "/visitingcards", requiredAccess: 'visitingCard' },
-  { name: 'Image Enhancer', icon: LuWand, path: '/imageenhancer', requiredAccess: 'imageEnhancer', isUnderDevelopment: true },
-  { name: 'ID Card Maker', icon: LuIdCard, path: "/idcard", requiredAccess: 'idCard' },
-  { name: 'Posters', icon: LuLayoutTemplate, path: "/poster", requiredAccess: 'posterEditor' },
+  //{ name: 'Visiting Cards', icon: LuContact, path: "/visitingcards", requiredAccess: 'visitingCard' },
+ // { name: 'Image Enhancer', icon: LuWand, path: '/imageenhancer', requiredAccess: 'imageEnhancer', isUnderDevelopment: true },
+ // { name: 'ID Card Maker', icon: LuIdCard, path: "/idcard", requiredAccess: 'idCard' },
+  //{ name: 'Posters', icon: LuLayoutTemplate, path: "/poster", requiredAccess: 'posterEditor' },
   
   /*{
     name: 'Branding Assets',
@@ -98,7 +98,7 @@ const menu: MenuItem[] = [
     requiredAccess: 'settings',
     children: [
      
-      { name: 'Profile & Preferences', path: '/userprofile' },
+      { name: 'Profile & Preferences', path: '/user-profile' },
     ],
   },
 

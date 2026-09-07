@@ -2,7 +2,6 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import ClientRootLayout from './client-root-layout';
-import SecurityGuard from '@/components/security-guard'; 
 import SmoothScroll from '@/components/smooth-scroll';
 import NextTopLoader from 'nextjs-toploader'; 
 
@@ -36,7 +35,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
 
         <SmoothScroll>
-          <SecurityGuard /> 
           <ClientRootLayout>{children}</ClientRootLayout>
         </SmoothScroll>
       </body>

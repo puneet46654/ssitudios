@@ -10,7 +10,7 @@ const IconWrapper = ({ children, label }: { children: React.ReactNode; label: st
   <button
     type="button"
     aria-label={label}
-    className="relative p-2 text-white/80 transition-all duration-200 rounded-full cursor-pointer hover:text-white hover:bg-white/10 hover:scale-110 active:scale-95"
+    className="relative p-2 text-white/80 transition-all duration-150 rounded-full cursor-pointer hover:text-white hover:bg-white/10 hover:scale-110 active:scale-95"
   >
     {children}
   </button>
@@ -29,7 +29,7 @@ export default function DashboardHeader() {
   const [thoughtIndex, setThoughtIndex] = useState(0)
   const headerRef = useRef<HTMLElement>(null)
 
-  // Manage expand/collapse state
+  // Manage expand/collapse state with faster timeout
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>
     if (isHovered) {
@@ -39,19 +39,19 @@ export default function DashboardHeader() {
         if (headerRef.current && !headerRef.current.matches(':hover')) {
           setIsExpanded(false)
         }
-      }, 300)
+      }, 150)
     }
     return () => clearTimeout(timeoutId)
   }, [isHovered])
 
-  // Cycle thoughts every 1 second while expanded
+  // Cycle thoughts faster every 600ms
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
 
     if (isExpanded) {
         intervalId = setInterval(() => {
             setThoughtIndex((prev) => (prev + 1) % THOUGHTS.length);
-        }, 1000); // Changed to 1000ms (1 second) to match animation duration
+        }, 600);
     }
 
     return () => clearInterval(intervalId);
@@ -68,7 +68,7 @@ export default function DashboardHeader() {
           'relative mx-auto mt-6 flex items-center justify-center rounded-full backdrop-blur-xl overflow-hidden',
           'animate-gemini-flow',
           'border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.1)]',
-          'transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]',
+          'transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]',
           isHovered && 'shadow-[0_8px_24px_rgba(0,0,0,0.4)]'
         )}
         style={{
@@ -79,7 +79,7 @@ export default function DashboardHeader() {
         {/* Expanded View */}
         <div
           className={clsx(
-            'flex items-center justify-between w-full transition-opacity duration-300',
+            'flex items-center justify-between w-full transition-opacity duration-150',
             isExpanded ? 'opacity-100' : 'opacity-0'
           )}
         >
@@ -115,7 +115,7 @@ export default function DashboardHeader() {
               <IconWrapper label="User Account">
                 <User size={20} />
               </IconWrapper>
-              <span className="absolute top-0 right-0 block w-2 h-2 bg-green-500 border border-white rounded-full animate-ping-slow" />
+              <span className="absolute top-0 right-0 block w-2 h-2 bg-green-500 border border-white rounded-full animate-ping-fast" />
             </Link>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default function DashboardHeader() {
         {/* Collapsed State View */}
         <div
           className={clsx(
-            'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-5 text-white/80 transition-opacity duration-300',
+            'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-5 text-white/80 transition-opacity duration-150',
             isExpanded ? 'opacity-0' : 'opacity-100',
             'pointer-events-none'
           )}
@@ -133,7 +133,7 @@ export default function DashboardHeader() {
             <Home size={20} className="cursor-pointer" />
           </Link>
           <User size={20} />
-          <span className="absolute top-0 right-0 block w-2 h-2 bg-green-500 border border-white rounded-full animate-ping-slow" />
+          <span className="absolute top-0 right-0 block w-2 h-2 bg-green-500 border border-white rounded-full animate-ping-fast" />
         </div>
 
       </header>
@@ -156,38 +156,33 @@ export default function DashboardHeader() {
             rgba(79, 61, 244, 0.8)
           );
           background-size: 400% 400%;
-          animation: gemini-flow 15s ease infinite;
+          animation: gemini-flow 6s ease infinite;
         }
 
-        /* Dot Pulse */
-        @keyframes ping-slow {
+        /* Fast Dot Pulse */
+        @keyframes ping-fast {
           0% { transform: scale(0.8); opacity: 1; }
-          50% { transform: scale(1.2); opacity: 0.6; }
+          50% { transform: scale(1.3); opacity: 0.5; }
           100% { transform: scale(0.8); opacity: 1; }
         }
-        .animate-ping-slow {
-          animation: ping-slow 1.5s infinite ease-in-out;
+        .animate-ping-fast {
+          animation: ping-fast 0.8s infinite ease-in-out;
         }
 
-        /* UPDATED: Smoother, 1-second Text Reveal Animation */
+        /* Faster Text Reveal Animation (0.6s) */
         @keyframes text-reveal {
-          /* Start slightly lower, blurred, transparent */
-          0% { opacity: 0; transform: translateY(8px); filter: blur(3px); }
-          /* Quickly arrive at center, focus in */
+          0% { opacity: 0; transform: translateY(6px); filter: blur(2px); }
           30% { opacity: 1; transform: translateY(0); filter: blur(0px); }
-          /* Stay still briefly */
           70% { opacity: 1; transform: translateY(0); filter: blur(0px); }
-          /* Exit upwards, blurring out */
-          100% { opacity: 0; transform: translateY(-8px); filter: blur(3px); }
+          100% { opacity: 0; transform: translateY(-6px); filter: blur(2px); }
         }
         .animate-text-reveal {
-          /* Changed duration to 1s */
-          animation: text-reveal 1s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+          animation: text-reveal 0.6s cubic-bezier(0.2, 0, 0.2, 1) forwards;
         }
         
         .mask-fade {
-             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
       `}</style>
     </>
