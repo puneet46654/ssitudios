@@ -103,7 +103,7 @@ export default function MantramBookingPage() {
       const result = await response.json();
       if (result.success) {
         setBookingNo(result.bookingNo);
-        setStep(3);
+        setStep(3); // Explicitly triggers step 3 and passes bookingNo
       } else {
         alert(result.error);
         setStep(1);
@@ -116,30 +116,27 @@ export default function MantramBookingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-emerald-500 selection:text-white">
-      <header className="bg-white/80 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50 print:hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
+      <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50 print:hidden">
         <div className="w-full px-4 sm:px-8 max-w-7xl mx-auto h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 font-bold text-lg">
+            <div className="w-10 h-10 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-600/20 font-extrabold text-lg">
               S
             </div>
             <div>
-              <h1 className="text-xl font-extrabold text-slate-900 tracking-tight font-sans">
+              <h1 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
                 SSI Mantram Portal
               </h1>
-              <p className="text-xs text-slate-500 font-medium">
-                Advanced Clinical Session Scheduling & Management
+              <p className="text-xs text-slate-400 font-medium">
+                Advanced Clinical Session Scheduling
               </p>
             </div>
           </div>
-          <div className="relative w-28 h-9 bg-slate-50 border border-slate-200/60 rounded-xl flex items-center justify-center overflow-hidden shadow-inner">
-            <Image src="/logos/ssilogo.png" alt="SSI Logo" fill className="object-contain p-1.5" priority />
-          </div>
         </div>
-        <div className="h-0.5 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500"></div>
+        <div className="h-0.5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
       </header>
 
-      <main className="flex-1 w-full px-4 sm:px-8 max-w-7xl mx-auto py-8 flex flex-col">
+      <main className="flex-1 w-full px-4 sm:px-8 max-w-7xl mx-auto py-8 flex flex-col justify-center">
         {step === 1 && (
           <TimeSelection 
             availableSlots={availableSlots} 
@@ -159,9 +156,9 @@ export default function MantramBookingPage() {
             onBack={() => setStep(1)}
           />
         )}
-        {step === 3 && bookingNo && (
+        {step === 3 && (
           <GreetingTicket 
-            bookingNo={bookingNo}
+            bookingNo={bookingNo ?? 1}
             formData={formData}
             selectedSlot={selectedSlot}
             onNewBooking={() => {
