@@ -102,7 +102,9 @@ function AppLayout({ children }: { children: ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const forceActive = pathname === "/selector" ? "Dashboard" : undefined;
   const isEditorPage = pathname?.startsWith("/editor");
+  const isStandalonePage = pathname === "/slots" || isEditorPage;
   const isLoginPage = pathname === "/login";
+  const isSlotsPage = pathname === "/slots";
 
   const toggleSidebar = useCallback(() => {
     setIsSidebarOpen(prev => !prev);
@@ -122,9 +124,9 @@ function AppLayout({ children }: { children: ReactNode }) {
     return "bg-[#F2F2F7] text-gray-900";
   }, [pathname]);
 
-  if (isEditorPage) return <>{children}</>;
+  if (isStandalonePage) return <>{children}</>;
 
-  if (!isAuthenticated && !isLoginPage) {
+  if (!isAuthenticated && !isLoginPage && !isSlotsPage) {
     // return null; 
   }
 

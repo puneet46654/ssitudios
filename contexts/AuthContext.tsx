@@ -83,12 +83,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (isLoading) return;
 
     const isAuthPage = pathname === '/login';
+    const isPublicPage = pathname === '/slots';
 
-    if (!user && !isAuthPage) {
-      router.replace('/login');
-    }
-
-    if (user && isAuthPage) {
+    if (!user && !isAuthPage && !isPublicPage) {
       router.replace('/dashboard');
     }
   }, [user, isLoading, pathname, router]);
